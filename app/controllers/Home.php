@@ -1,9 +1,13 @@
 <?php
 
-class Home
+class Home extends Controller
 {
   public function index()
   {
-    echo 'home/index';
+    $data = [
+      'judul' => __CLASS__
+    ];
+
+    $this->view('home.index', $data);
   }
 }
