@@ -8,7 +8,7 @@
 
   <div class="row">
     <div class="col-lg-6">
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#formModal">
+      <button type="button" class="btn btn-primary tampilModalTambah" data-toggle="modal" data-target="#formModal">
         Tambah Data Mahasiswa
       </button>
 
@@ -18,24 +18,30 @@
 
       <ul class="list-group">
         <?php foreach ($data['mhs'] as $mhs) : ?>
-          <li class="list-group-item d-flex justify-content-between align-items-center"><?= $mhs['nama']; ?><a href="<?= BASEURL; ?>/mahasiswa/detail/<?= $mhs['id']; ?>" class="badge badge-primary">Detail</a></li>
+          <li class="list-group-item"><?= $mhs['nama']; ?>
+            <a href="<?= BASEURL; ?>/mahasiswa/hapus/<?= $mhs['id']; ?>" class="badge badge-danger float-right ml-1" onclick="return confirm('Yakin?');">Hapus</a>
+            <a href="<?= BASEURL; ?>/mahasiswa/ubah/<?= $mhs['id']; ?>" class="badge badge-success float-right ml-1 tampilModalUbah" data-toggle="modal" data-target="#formModal" data-id="<?= $mhs['id']; ?>">Ubah</a>
+            <a href="<?= BASEURL; ?>/mahasiswa/detail/<?= $mhs['id']; ?>" class="badge badge-primary float-right ml-1">Detail</a>
+          </li>
         <?php endforeach ?>
       </ul>
     </div>
   </div>
 </div>
 
+<!-- Modal Add & Update -->
 <div class="modal fade" id="formModal" tabindex="-1" aria-labelledby="judulModal" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="judulModal">Tambah Data Mahasiswa</h5>
+        <h5 class="modal-title" id="judulModal"></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
         <form action="<?= BASEURL; ?>/mahasiswa/tambah" method="POST">
+          <input type="hidden" name="id" id="id">
           <div class="form-group">
             <label for="nama" class="col-form-label">Nama</label>
             <input type="text" class="form-control" id="nama" name="nama" required>
@@ -62,7 +68,7 @@
       </div>
       <div class="modal-footer">
         <button type="reset" class="btn btn-danger">Reset Data</button>
-        <button type="submit" class="btn btn-primary">Tambah Data</button>
+        <button type="submit" class="btn btn-primary"></button>
         </form>
       </div>
     </div>
